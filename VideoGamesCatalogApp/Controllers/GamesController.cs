@@ -178,13 +178,10 @@ namespace VideoGamesCatalogApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var game = await _context.Games.FindAsync(id);
-            if (game != null)
-            {
-                _context.Games.Remove(game);
-            }
+            await _context.Games
+                .Where(g => g.GameId == id)
+                .ExecuteDeleteAsync();
 
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
