@@ -1,0 +1,69 @@
+@model VideoGamesCatalogApp.Models.SystemRequirement
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>SystemRequirement</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="SysReqId" />
+            <div class="form-group">
+                <label asp-for="RequirementType" class="control-label"></label>
+                <input asp-for="RequirementType" class="form-control" />
+                <span asp-validation-for="RequirementType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RamGb" class="control-label"></label>
+                <input asp-for="RamGb" class="form-control" />
+                <span asp-validation-for="RamGb" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StorageGb" class="control-label"></label>
+                <input asp-for="StorageGb" class="form-control" />
+                <span asp-validation-for="StorageGb" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Os" class="control-label"></label>
+                <input asp-for="Os" class="form-control" />
+                <span asp-validation-for="Os" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DirectXversion" class="control-label"></label>
+                <input asp-for="DirectXversion" class="form-control" />
+                <span asp-validation-for="DirectXversion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GameId" class="control-label"></label>
+                <select asp-for="GameId" class="form-control" asp-items="ViewBag.GameId"></select>
+                <span asp-validation-for="GameId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CpuId" class="control-label"></label>
+                <select asp-for="CpuId" class="form-control" asp-items="ViewBag.CpuId"></select>
+                <span asp-validation-for="CpuId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GpuId" class="control-label"></label>
+                <select asp-for="GpuId" class="form-control" asp-items="ViewBag.GpuId"></select>
+                <span asp-validation-for="GpuId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

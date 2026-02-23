@@ -1,0 +1,128 @@
+﻿@model IEnumerable<VideoGamesCatalogApp.Models.User>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Користувачі</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Додати нового користувача</a>
+</p>
+
+<form asp-action="Index" method="get" class="mb-4 mt-3">
+    <div class="row g-2 align-items-center">
+        <div class="col-auto">
+            <input type="text" name="searchString" value="@ViewData["CurrentFilter"]"
+                   class="form-control" placeholder="Search by username or email..." style="width: 300px;" />
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+        <div class="col-auto">
+            <a asp-action="Index" class="btn btn-outline-secondary">Reset</a>
+        </div>
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]" asp-route-searchString="@ViewData["CurrentFilter"]">
+                    @Html.DisplayNameFor(model => model.Username) ↕️
+                </a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PasswordHash)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phone)
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["BalanceSortParm"]" asp-route-searchString="@ViewData["CurrentFilter"]">
+                    @Html.DisplayNameFor(model => model.WalletBalance) ↕️
+                </a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]" asp-route-searchString="@ViewData["CurrentFilter"]">
+                    @Html.DisplayNameFor(model => model.RegistrationDate) ↕️
+                </a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["LastLoginSortParm"]" asp-route-searchString="@ViewData["CurrentFilter"]">
+                    @Html.DisplayNameFor(model => model.LastLoginDate) ↕️
+                </a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsBlocked)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BanReason)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Role)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Username)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PasswordHash)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WalletBalance)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RegistrationDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastLoginDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsBlocked)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BanReason)
+            </td>
+                <td>
+                    @item.Role?.RoleName
+                </td>
+            @if (User.IsInRole("Admin"))
+            {
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.UserId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.UserId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.UserId">Delete</a>
+                </td>
+            }
+        </tr>
+}
+    </tbody>
+</table>

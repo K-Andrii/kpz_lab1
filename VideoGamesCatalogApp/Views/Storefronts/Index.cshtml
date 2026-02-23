@@ -1,0 +1,45 @@
+@model IEnumerable<VideoGamesCatalogApp.Models.Storefront>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Магазини</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Додати новий магазин</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+                <td>
+                    <div class="btn-group" role="group">
+                        @if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
+                        {
+                            <a asp-action="Edit" asp-route-id="@item.StorefrontId" class="btn btn-sm btn-outline-warning">Edit</a>
+                        }
+
+                        <a asp-action="Details" asp-route-id="@item.StorefrontId" class="btn btn-sm btn-outline-info">Details</a>
+
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <a asp-action="Delete" asp-route-id="@item.StorefrontId" class="btn btn-sm btn-outline-danger">Delete</a>
+                        }
+                    </div>
+                </td>
+        </tr>
+}
+    </tbody>
+</table>

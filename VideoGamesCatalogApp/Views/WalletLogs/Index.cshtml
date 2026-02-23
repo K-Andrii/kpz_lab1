@@ -1,0 +1,63 @@
+@model IEnumerable<VideoGamesCatalogApp.Models.WalletLog>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Історія гаманця</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Додати новий запис</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UserId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OldBalance)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NewBalance)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ChangeDate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OldBalance)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NewBalance)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ChangeDate)
+            </td>
+                <td>
+                    <div class="btn-group" role="group">
+                        @if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
+                        {
+                            <a asp-action="Edit" asp-route-id="@item.LogId" class="btn btn-sm btn-outline-warning">Edit</a>
+                        }
+
+                        <a asp-action="Details" asp-route-id="@item.LogId" class="btn btn-sm btn-outline-info">Details</a>
+
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <a asp-action="Delete" asp-route-id="@item.LogId" class="btn btn-sm btn-outline-danger">Delete</a>
+                        }
+                    </div>
+                </td>
+        </tr>
+}
+    </tbody>
+</table>

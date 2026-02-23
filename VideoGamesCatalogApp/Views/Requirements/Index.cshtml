@@ -1,0 +1,87 @@
+@model IEnumerable<VideoGamesCatalogApp.Models.SystemRequirement>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Системні вимоги</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Додати нові системні вимоги</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.RequirementType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RamGb)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StorageGb)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Os)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DirectXversion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cpu)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Game)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gpu)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RequirementType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RamGb)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StorageGb)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Os)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DirectXversion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cpu.ComponentId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Game.GameId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gpu.ComponentId)
+            </td>
+                <td>
+                    <div class="btn-group" role="group">
+                        @if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
+                        {
+                            <a asp-action="Edit" asp-route-id="@item.SysReqId" class="btn btn-sm btn-outline-warning">Edit</a>
+                        }
+
+                        <a asp-action="Details" asp-route-id="@item.SysReqId" class="btn btn-sm btn-outline-info">Details</a>
+
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <a asp-action="Delete" asp-route-id="@item.SysReqId" class="btn btn-sm btn-outline-danger">Delete</a>
+                        }
+                    </div>
+                </td>
+        </tr>
+}
+    </tbody>
+</table>

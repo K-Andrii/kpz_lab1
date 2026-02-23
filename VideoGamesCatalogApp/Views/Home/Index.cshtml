@@ -1,0 +1,31 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center py-5 shadow-sm rounded bg-light mb-4">
+    <h1 class="display-3 fw-bold text-primary">Video Games Catalog App</h1>
+    <p class="lead text-secondary">Your ultimate database for managing games, hardware, and sales.</p>
+    <hr class="my-4 mx-auto" style="width: 50%;">
+    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mt-4">
+        <a asp-controller="Games" asp-action="Index" class="btn btn-primary btn-lg px-4 gap-3">🎮 Explore Games</a>
+        <a asp-controller="Orders" asp-action="Index" class="btn btn-outline-secondary btn-lg px-4">📦 Manage Orders</a>
+    </div>
+</div>
+
+<div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+    <div class="feature col text-center">
+        <div class="feature-icon d-inline-flex align-items-center justify-content-center fs-2 mb-3">🛠️</div>
+        <h3 class="fs-2 text-body-emphasis">Database Control</h3>
+        <p>Manage 15+ interconnected tables with ease using our administrative tools.</p>
+    </div>
+    <div class="feature col text-center">
+        <div class="feature-icon d-inline-flex align-items-center justify-content-center fs-2 mb-3">📈</div>
+        <h3 class="fs-2 text-body-emphasis">Sales Tracking</h3>
+        <p>Monitor every game sale, key generation, and user wallet transaction.</p>
+    </div>
+    <div class="feature col text-center">
+        <div class="feature-icon d-inline-flex align-items-center justify-content-center fs-2 mb-3">💻</div>
+        <h3 class="fs-2 text-body-emphasis">Hardware Sync</h3>
+        <p>Cross-reference game system requirements with existing hardware components.</p>
+    </div>
+</div>

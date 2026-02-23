@@ -1,0 +1,87 @@
+@model IEnumerable<VideoGamesCatalogApp.Models.GameKey>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Ключі</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Додати новий ключ</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.LicenseKey)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PurchaseDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsActive)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RevocationReason)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CurrentUser)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Game)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Storefront)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.LicenseKey)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PurchaseDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsActive)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RevocationReason)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.CurrentUser.Username)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.Game.Title)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.Order.TransactionId)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.Storefront.Name)
+            </td>
+                <td>
+                    <div class="btn-group" role="group">
+                        @if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
+                        {
+                            <a asp-action="Edit" asp-route-id="@item.KeyId" class="btn btn-sm btn-outline-warning">Edit</a>
+                        }
+
+                        <a asp-action="Details" asp-route-id="@item.KeyId" class="btn btn-sm btn-outline-info">Details</a>
+
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <a asp-action="Delete" asp-route-id="@item.KeyId" class="btn btn-sm btn-outline-danger">Delete</a>
+                        }
+                    </div>
+                </td>
+        </tr>
+}
+    </tbody>
+</table>
